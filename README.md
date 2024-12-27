@@ -1,2 +1,2 @@
 # Projects
-My Projects
+My Store Project
