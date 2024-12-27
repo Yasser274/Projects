@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Product</title>
+      <link rel="stylesheet" href="css/shop.css" />
+      <link rel="stylesheet" href="css/style.css" />
+   </head>
+   <body>
+      <!-- .HEADER -->
+      <header id="header">
+         <a href="index.html"><img src="img/logo.png" class="logo" /></a>
+
+         <div class="header-links">
+            <ul id="navbar">
+               <li><a href="index.html">Home</a></li>
+               <li><a href="shop.html">Shop</a></li>
+               <li><a href="blog.html">Blog</a></li>
+               <li><a href="about.html">About</a></li>
+               <li><a href="contact.html">Contact</a></li>
+               <label class="mode-con-mobile">
+                  <input type="checkbox" id="darkModeMobile" />
+                  <iconify-icon icon="icon-park-outline:sun" style="color: white" class="sun"></iconify-icon>
+                  <iconify-icon icon="ri:moon-fill" style="color: black" class="moon"></iconify-icon>
+                  <span class="toggle-mode"></span>
+               </label>
+
+               <i id="closeButtonNav" class="close-nav-button"
+                  ><img src="https://cdn-icons-png.flaticon.com/512/4034/4034637.png"
+               /></i>
+            </ul>
+         </div>
+         <div>
+            <li class="cart-con">
+               <div class="logincon">
+                  <button class="login" id="loginButton">Login</button>
+               </div>
+               <label class="mode-con">
+                  <input type="checkbox" id="darkMode" />
+                  <iconify-icon icon="icon-park-outline:sun" style="color: white" class="sun"></iconify-icon>
+                  <iconify-icon icon="ri:moon-fill" style="color: black" class="moon"></iconify-icon>
+                  <span class="toggle-mode"></span>
+               </label>
+               <a href="cart.html" class="cart-box"
+                  ><img
+                     src="https://cdn-icons-png.flaticon.com/512/3643/3643914.png"
+                     class="cart-img"
+                     id="cartID"
+                  />
+                  <div class="cart-amount" id="cartAmount">0</div></a
+               >
+            </li>
+         </div>
+         <div id="mobile">
+            <a href="cart.html" class="cart-con-mobile"
+               ><img src="https://cdn-icons-png.flaticon.com/512/3643/3643914.png" class="cart-img" />
+               <div class="cart-amount-mobile" id="cartAmountMobile">0</div></a
+            >
+            <i id="bar" class="bar-icon"
+               ><img src="https://cdn-icons-png.flaticon.com/512/12314/12314153.png"
+            /></i>
+         </div>
+      </header>
+      <!-- .PRODUCT SPACE -->
+      <section id="prodetails" class="section-p1">
+         <div class="single-pro-image">
+            <img
+               src="https://img01.ztat.net/article/spp-media-p1/55f026a63519430db6aa1aeb2d5cedd3/cdc8ab1c98f84d08b6ef1a27be8566f2.jpg?imwidth=762"
+               width="100%"
+               id="MainImg"
+            />
+            <div class="small-img-group">
+               <div class="small-pro-con">
+                  <img
+                     src="https://www.mrporter.com/variants/images/4068790126487369/in/w2000_q80.jpg"
+                     width="100%"
+                     class="small-product-image"
+                  />
+               </div>
+            </div>
+         </div>
+         <div class="about-product-con" id="productDetailsCon">
+            <h6>Home / T-Shirt</h6>
+            <h3 class="product-brand">Nike</h3>
+            <h4 class="product-name">White POLO T-Shirt</h4>
+            <h2 class="product-price">$25.00</h2>
+            <div class="size-selector">
+               <button class="size-button" data-size="S">Small</button>
+               <button class="size-button" data-size="M">Medium</button>
+               <button class="size-button" data-size="L">Large</button>
+               <button class="size-button" data-size="XL">Extra Large</button>
+               <button class="size-button" data-size="XXL">XXL</button>
+            </div>
+            <div class="add-value">
+               <input type="number" value="1" id="quantityItem" />
+               <button class="pro-add-button">Add to Cart</button>
+            </div>
+
+            <h4>Product Details</h4>
+            <span class="product-des">sgkogsfksofgpkspofgkopsfgkposkgeopskgopse</span>
+         </div>
+      </section>
+      <!-- .FEATURE CLOTHES -->
+      <section id="product1" class="section-p1">
+         <header class="title-feature">
+            <h2>More Products</h2>
+            <p>Summer Collection New Amazing Design</p>
+         </header>
+      </section>
+
+      <!-- .FOOTER -->
+      <footer id="footer">
+         <div class="footer-con section-m1 section-p1">
+            <div class="footer-section">
+               <img src="img/logo.png" alt="" />
+               <div>Contact</div>
+               <div class="below-contact">Address: <span>398 Ramblewood St.Massapequa, NY 11758</span></div>
+               <div class="below-contact">Phone: <span>+1 (043) 304-7309/+1 (260) 184-2985</span></div>
+               <div class="below-contact">Hours: <span>9:00 - 20:00, Mon - Sat</span></div>
+               <div class="footer-follow">
+                  <div>Follow us</div>
+                  <div class="social-icons">
+                     <a href="#" class="twitter"><ion-icon name="logo-twitter"></ion-icon></a>
+                     <a href="https://www.youtube.com" class="youtube"
+                        ><ion-icon name="logo-youtube"></ion-icon
+                     ></a>
+                     <a href="#" class="instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+                     <a href="#" class="facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+                  </div>
+               </div>
+            </div>
+            <div class="footer-section footer-links">
+               <div>My Account</div>
+               <a href=""><span>Sign in</span></a>
+               <a href=""><span>View Cart</span></a>
+               <a href=""><span>My Wishlist</span></a>
+               <a href=""><span>Track My Order</span></a>
+               <a href=""><span>Help</span></a>
+            </div>
+            <div class="footer-section footer-links">
+               <div>About</div>
+               <a href=""><span>About us</span></a>
+               <a href=""><span>Delivery Information</span></a>
+               <a href=""><span>Privacy Policy</span></a>
+               <a href=""><span>Terms & Conditions</span></a>
+               <a href=""><span>Contact Us</span></a>
+            </div>
+            <div class="footer-section footer-app">
+               <div>Install App</div>
+               <span>From App Store or Google Play</span>
+               <div class="app-download">
+                  <a href=""
+                     ><img
+                        src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Badge-Logo.wine.svg"
+                        alt=""
+                  /></a>
+                  <a href=""
+                     ><img
+                        src="https://www.logo.wine/a/logo/App_Store_(iOS)/App_Store_(iOS)-Badge-Alternative-Logo.wine.svg"
+                        alt=""
+                  /></a>
+               </div>
+
+               <span>Secured Payment Gateways</span>
+               <div class="payments-logo">
+                  <img
+                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/800px-Visa_Inc._logo.svg.png"
+                     alt=""
+                  />
+                  <img
+                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/2560px-MasterCard_Logo.svg.png"
+                     alt=""
+                  />
+                  <img
+                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Mada_Logo.svg/1200px-Mada_Logo.svg.png"
+                     alt=""
+                  />
+               </div>
+            </div>
+         </div>
+
+         <!-- .Copyright -->
+         <div class="copyright">
+            <div>© 2022 YS</div>
+         </div>
+      </footer>
+
+      <!-- .LOGIN POPUP -->
+      <!-- Add a new element to cover the entire page -->
+      <div id="overlay"></div>
+      <div class="login-pop-con" id="loginPopUpBox">
+         <h2>Login</h2>
+         <div class="logindetailsEP">
+            <div class="input-con-login">
+               <iconify-icon icon="bi:envelope-at-fill"></iconify-icon>
+               <input type="text" id="email" placeholder=" " class="login-fields" />
+               <label for="email" class="floating-label">Email</label>
+            </div>
+
+            <div class="input-con-login">
+               <iconify-icon icon="material-symbols:password"></iconify-icon>
+               <input type="password" id="password" placeholder=" " class="login-fields" />
+               <label for="password" class="floating-label">Password</label>
+            </div>
+         </div>
+         <div class="remember-forget">
+            <label for=""><input type="checkbox" name="" id="" />Remember me</label>
+            <a href="#">Forgot Password?</a>
+         </div>
+         <div class="login-final-button">
+            <button type="submit" class="login-in-button" id="submitLoginButton">Login</button>
+         </div>
+         <div class="no-account">
+            <p>
+               Don't have an account? <br />
+               <a href="#" id="registerSwitch">Register here</a>
+            </p>
+         </div>
+         <div class="close-button all-close-popups" id="closeLoginBox">
+            <iconify-icon icon="line-md:close-circle"></iconify-icon>
+         </div>
+      </div>
+
+      <!-- .REGISTER POPUP -->
+      <div class="register-pop-con" id="registerPopUpBox">
+         <h2>Register</h2>
+         <div class="logindetailsEP">
+            <div class="input-con-login">
+               <iconify-icon icon="ph:user-bold"></iconify-icon>
+               <input type="text" id="email" placeholder=" " class="login-fields" />
+               <label for="username" class="floating-label">Username</label>
+            </div>
+            <div class="input-con-login">
+               <iconify-icon icon="bi:envelope-at-fill"></iconify-icon>
+               <input type="text" id="email" placeholder=" " class="login-fields" />
+               <label for="email" class="floating-label">Email</label>
+            </div>
+
+            <div class="input-con-login">
+               <iconify-icon icon="material-symbols:password"></iconify-icon>
+               <input type="password" id="password" placeholder=" " class="login-fields" />
+               <label for="password" class="floating-label">Password</label>
+            </div>
+         </div>
+         <div class="remember-forget">
+            <label for=""><input type="checkbox" name="" id="" />I agree to the terms & conditions</label>
+            <a href="#">Terms</a>
+         </div>
+         <div class="login-final-button">
+            <button type="submit" class="login-in-button" id="registerButton">Register</button>
+         </div>
+         <div class="no-account">
+            <p>
+               Already have an account? <br />
+               <a href="#" id="loginSwitch">Login</a>
+            </p>
+         </div>
+         <div class="close-button all-close-popups" id="closeLoginBox">
+            <iconify-icon icon="line-md:close-circle"></iconify-icon>
+         </div>
+      </div>
+
+      <script src="src/data.js"></script>
+      <script src="src/script.js"></script>
+      <!-- *SCRIPT FOR ICONS SOCIAL MEDIA -->
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+      <script src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
+   </body>
+</html>
