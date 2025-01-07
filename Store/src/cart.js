@@ -150,7 +150,7 @@ let generateCartItems = () => {
             ></a>
           </td>
           <td>
-            <a href=""
+            <a href="productp.html?id=${id}"
               ><img
                 class="table-pro-img"
                 src=${search.img}
