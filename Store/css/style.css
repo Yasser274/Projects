@@ -437,7 +437,7 @@ p {
    flex-direction: column;
    align-items: flex-start;
    justify-content: first baseline;
-   background-image: url("https://c4.wallpaperflare.com/wallpaper/263/735/620/simple-background-yellow-dress-asian-women-wallpaper-preview.jpg");
+   background-image: url("https://elagia.com/cdn/shop/files/head_banner_3.jpg?v=1686737655&width=1800");
    background-size: cover;
    background-position: center 20%;
    flex: 1;
@@ -446,7 +446,7 @@ p {
    border-radius: 5px;
 }
 .banner-con2 {
-   background-image: url("https://www.realsimple.com/thmb/vcQqq4rCxLuINJQ_fZW7NZspS4w=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/clothing-2000-b5ef8d353ed54800b1a29e3e7c5b2709.jpg");
+   background-image: url("https://americantall.com/cdn/shop/articles/Banner-WEB_1100x.jpg?v=1649187997");
 }
 .banner-con h4 {
    color: white;
@@ -510,7 +510,7 @@ p {
    border-radius: 5px;
 }
 #banner3 .banner2 {
-   background-image: url("https://blog.bellacanvas.com/wp-content/uploads/2016/07/3001-unisex.jpg");
+   background-image: url("https://nhabegarment.com/uploads/Images/tshirt-manufacturer.jpg");
 }
 #banner3 .banner2 h3 {
    color: white;
@@ -1245,10 +1245,11 @@ input:checked ~ .toggle-mode {
       align-items: center;
       justify-content: center;
       gap: 5px;
-      height: 100vh;
+      height: auto;
    }
    .right-con-about {
       width: 100%;
+      margin-top: 30px;
    }
    .left-con-about {
       width: 100%;
@@ -1261,12 +1262,9 @@ input:checked ~ .toggle-mode {
       overflow-wrap: break-word;
       font-size: 1rem;
       font-weight: 600;
-      line-height: 25px;
+      line-height: 30px;
    }
    /* *Download section */
-   #about-app {
-      margin-top: 0px;
-   }
    .about-app-con {
       gap: 26px;
    }
