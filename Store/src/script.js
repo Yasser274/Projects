@@ -130,6 +130,8 @@ let changeStarsColorTheme = () => {
 let products = document.getElementById("shop1"); // target products-box
 let products2 = document.getElementById("shop2Newly"); //? Targets Newly arrived section
 let productsShop = document.getElementById("shopPageProductsCon"); //? targets shop page
+let maleGenderButton = document.getElementById("maleButton");
+let femaleGenderButton = document.getElementById("femaleButton");
 
 //? function to make product cards based on the place you want it to be and the list you want to it pull data from
 let makeProducts = (place, theListOfProducts) => {
@@ -165,6 +167,10 @@ let filterProducts = (theListOfProducts, chosenIds) => {
    // Filtering products where the brand is one of the selected brands
    return theListOfProducts.filter((product) => selectedIds.includes(product.id));
 };
+//* Filter by Gender
+let filterProductsByGender = (theListOfProducts, gender) => {
+   return theListOfProducts.filter((product) => product.gender === gender); //? look through an array and its object to see if gender property matches the one given if so filter it
+};
 if (products) {
    //? this checks if  this is in the page i'm currently on it will run this
    let featuredHomeProducts = ["fsfes", "htehet", "egsesgsees", "5h335h", "hreher"];
@@ -173,6 +179,29 @@ if (products) {
 }
 if (productsShop) {
    makeProducts(productsShop, productsList); //? SHOP PAGE
+
+   maleGenderButton.addEventListener("click", () => {
+      maleGenderButton.classList.toggle("active");
+      femaleGenderButton.classList.remove("active");
+      if (maleGenderButton.classList.contains("active")) {
+         let maleProducts = filterProductsByGender(productsList, "Male"); //? to only show male products in shop page
+         makeProducts(productsShop, maleProducts);
+      } else {
+         makeProducts(productsShop, productsList); //? show all products if it isn't active
+      }
+   });
+
+   femaleGenderButton.addEventListener("click", () => {
+      femaleGenderButton.classList.toggle("active");
+      maleGenderButton.classList.remove("active");
+
+      if (femaleGenderButton.classList.contains("active")) {
+         let femaleProducts = filterProductsByGender(productsList, "Female");
+         makeProducts(productsShop, femaleProducts);
+      } else {
+         makeProducts(productsShop, productsList);
+      }
+   });
 }
 if (products2) {
    let newlyHomeProducts = ["2441h1", "egsesgsees", "eheht3w4"];
@@ -271,10 +300,8 @@ if (products || products2 || productsShop) {
 // .ADD TO CART FUNCTION
 let cart = JSON.parse(localStorage.getItem("Data")) || []; // ? || Is or so if there is localstorage already use it  if not use empty array
 
-let increaseAmountButton = document.getElementById('IncreaseingAmount')
-let decreaseAmountButton = document.getElementById('decreaseingAmount')
-
-
+let increaseAmountButton = document.getElementById("IncreaseingAmount");
+let decreaseAmountButton = document.getElementById("decreaseingAmount");
 
 let addedItem = async (id) => {
    let amount = Number(document.getElementById("quantityItem").value); // Convert the string into a number
@@ -433,7 +460,7 @@ function changeImages(smallImg) {
 }
 //? making it not decrease less than 0 the input number
 let quantityInput = document.getElementById("quantityItem");
-let exactQuantityInput = Number(document.getElementById('quantityItem').value)
+let exactQuantityInput = Number(document.getElementById("quantityItem").value);
 if (MainImg) {
    fillInProductPage(); // this to load info for the single product page
    changeImages(smallImg);
@@ -446,21 +473,21 @@ if (MainImg) {
          quantityInput.value = 1;
       }
       // Update the exactQuantityInput variable when the user manually changes the value or when changed via the input arrows
-      exactQuantityInput = Number(quantityInput.value)
+      exactQuantityInput = Number(quantityInput.value);
    });
 
    // *Increase and Decrease Button
-   increaseAmountButton.addEventListener('click', () => {
-      exactQuantityInput += 1
-      quantityInput.value = exactQuantityInput // let them both match each other
-   })
-   decreaseAmountButton.addEventListener('click', () =>{
+   increaseAmountButton.addEventListener("click", () => {
+      exactQuantityInput += 1;
+      quantityInput.value = exactQuantityInput; // let them both match each other
+   });
+   decreaseAmountButton.addEventListener("click", () => {
       if (exactQuantityInput > 1) {
-         exactQuantityInput -= 1
+         exactQuantityInput -= 1;
       }
-      
-      quantityInput.value = exactQuantityInput
-   })
+
+      quantityInput.value = exactQuantityInput;
+   });
 }
 
 // .GET FEATURE CLOTHING
