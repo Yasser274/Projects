@@ -304,7 +304,7 @@ let increaseAmountButton = document.getElementById("IncreaseingAmount");
 let decreaseAmountButton = document.getElementById("decreaseingAmount");
 
 let addedItem = async (id) => {
-   let amount = Number(document.getElementById("quantityItem").value); // Convert the string into a number
+   let amount = exactQuantityInput
    if (amount <= 0) {
       alert("Please add at least one item.");
       document.getElementById("quantityItem").value = 1;
@@ -336,7 +336,15 @@ let addedItem = async (id) => {
    } else {
       search.item += amount; // If the item is there, increase the quantity
    }
+   exactQuantityInput = 1 //? reset the amount value after adding to cart
    document.getElementById("quantityItem").value = 1; //? reset the amount value after adding to cart
+   // Debug and remove the 'selected' class from all size buttons
+   let sizeButtons = document.querySelectorAll(".size-button");
+   if (sizeButtons.length > 0) {
+      sizeButtons.forEach((btn) => btn.classList.remove("selected"));
+   } else {
+      console.warn("No size buttons found");
+   }
 
    updateCartAmountNum();
    localStorage.setItem("Data", JSON.stringify(cart));
