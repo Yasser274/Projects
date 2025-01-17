@@ -46,6 +46,15 @@
    border-radius: 8px;
    font-weight: 700;
 }
+.page-numbers.active {
+  background-color: #333; 
+  color: white; 
+  border-radius: 5px; 
+}
+
+.page-numbers:hover {
+  background-color: #ddd; 
+}
 
 
 /* ********************************PRODUCT SECTIONS */

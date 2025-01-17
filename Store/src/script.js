@@ -183,14 +183,21 @@ if (productsShop) {
    maleGenderButton.addEventListener("click", () => {
       maleGenderButton.classList.toggle("active");
       femaleGenderButton.classList.remove("active");
+
       if (maleGenderButton.classList.contains("active")) {
          let maleProducts = filterProductsByGender(productsList, "Male"); //? to only show male products in shop page
          makeProducts(productsShop, maleProducts);
-         starRating(productsList)
+         currentPage = 1
+         paginateProducts(1, maleProducts);  // Update pagination for filtered male products
+         createPagination(maleProducts);  // Create new pagination
+         starRating(maleProducts);
          changeStarsColorTheme();
       } else {
          makeProducts(productsShop, productsList); //? show all products if it isn't active
-         starRating(productsList)
+         currentPage = 1
+         paginateProducts(1, productsList);  // Update pagination for all products
+         createPagination(productsList);  // Create pagination for all products
+         starRating(productsList);
          changeStarsColorTheme();
       }
    });
@@ -202,11 +209,17 @@ if (productsShop) {
       if (femaleGenderButton.classList.contains("active")) {
          let femaleProducts = filterProductsByGender(productsList, "Female");
          makeProducts(productsShop, femaleProducts);
-         starRating(productsList)
+         currentPage = 1
+         paginateProducts(1, femaleProducts);  // Update pagination for filtered female products
+         createPagination(femaleProducts);  // Create new pagination
+         starRating(femaleProducts);
          changeStarsColorTheme();
       } else {
          makeProducts(productsShop, productsList);
-         starRating(productsList)
+         currentPage = 1
+         paginateProducts(1, productsList);  // Update pagination for all products
+         createPagination(productsList);  // Create pagination for all products
+         starRating(productsList);
          changeStarsColorTheme();
       }
    });
@@ -216,6 +229,70 @@ if (products2) {
    let selectedproducts = filterProducts(productsList, newlyHomeProducts);
    makeProducts(products2, selectedproducts);
 }
+
+// .Shop Page split pages
+
+// Pagination variables
+let currentPage = 1;
+const productsPerPage = 6;
+
+// Function to paginate the products
+let paginateProducts = (pageNumber, filteredProducts) => {
+   // Get the start and end indices for slicing the array
+   const start = (pageNumber - 1) * productsPerPage;
+   const end = start + productsPerPage;
+
+   // Slice the product list for the current page
+   const paginatedProducts = filteredProducts.slice(start, end);
+
+   // Call the makeProducts function to display the products
+   makeProducts(productsShop, paginatedProducts);
+   changeStarsColorTheme()
+};
+
+let createPagination = (filteredProducts) => {
+   const paginationContainer = document.getElementById("pagesNum");
+
+   // Clear any existing pagination
+   paginationContainer.innerHTML = "";
+
+   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+   // Add page numbers dynamically based on the total pages
+   for (let i = 1; i <= totalPages; i++) {
+      const pageLink = document.createElement("a");
+      pageLink.href = "#";
+      pageLink.classList.add("page-numbers");
+      pageLink.innerText = i;
+
+      // Check if the page number is the current page and set the active class accordingly
+      if (i === currentPage) {
+         pageLink.classList.add("active");
+      }
+
+      // Add event listener to go to the selected page
+      pageLink.addEventListener("click", (event) => {
+         event.preventDefault();
+         currentPage = i;  // Set the current page to the clicked page
+         paginateProducts(currentPage, filteredProducts);  // Show products for the selected page
+
+         // After products are updated, update pagination with the correct active page
+         createPagination(filteredProducts);  // Recreate pagination links
+      });
+
+      paginationContainer.appendChild(pageLink);
+   }
+
+   changeStarsColorTheme();  // Your custom function for stars color theme
+};
+
+
+// Initial page load
+if (productsShop) {
+   paginateProducts(currentPage, productsList);  // Load products for the first page
+   createPagination(productsList);  // Create page numbers for all products
+}
+
 
 // .FILL IN SINGLE PRODUCT INFO PAGE
 
@@ -312,7 +389,7 @@ let increaseAmountButton = document.getElementById("IncreaseingAmount");
 let decreaseAmountButton = document.getElementById("decreaseingAmount");
 
 let addedItem = async (id) => {
-   let amount = exactQuantityInput
+   let amount = exactQuantityInput;
    if (amount <= 0) {
       alert("Please add at least one item.");
       document.getElementById("quantityItem").value = 1;
@@ -344,7 +421,7 @@ let addedItem = async (id) => {
    } else {
       search.item += amount; // If the item is there, increase the quantity
    }
-   exactQuantityInput = 1 //? reset the amount value after adding to cart
+   exactQuantityInput = 1; //? reset the amount value after adding to cart
    document.getElementById("quantityItem").value = 1; //? reset the amount value after adding to cart
    // Debug and remove the 'selected' class from all size buttons
    let sizeButtons = document.querySelectorAll(".size-button");
