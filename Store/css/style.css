@@ -439,7 +439,7 @@ p {
    justify-content: first baseline;
    background-image: url("https://elagia.com/cdn/shop/files/head_banner_3.jpg?v=1686737655&width=1800");
    background-size: cover;
-   background-position: center 20%;
+   background-position: 1%;
    flex: 1;
    height: 35vh;
    padding: 30px 20px;
@@ -863,7 +863,8 @@ input:checked ~ .toggle-mode {
    overflow: hidden;
    display: none;
 }
-.showRegisterBox,.showLoginBox {
+.showRegisterBox,
+.showLoginBox {
    display: block;
 }
 .login-pop-con h2,
@@ -1443,6 +1444,10 @@ input:checked ~ .toggle-mode {
       justify-content: center;
       background-position: top 24% right 70%;
       transform: translateX(0%);
+   }
+   /** Banners on home page */
+   .banner-con {
+      height: auto;
    }
 }
 /* .364px */
