@@ -56,8 +56,9 @@ let productsList = [
       description:
          "Classic crew neck tee in a dark navy. Subtle BOSS logo. Premium cotton blend. Comfortable fit. Ideal for layering or casual wear.",
       smallImages: [
-         "https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1311093_alternate10?$plpDeskRF$",
-         "https://media.very.co.uk/i/very/4DGRD_SQ1_0000000013_WHITE_MDf?$pdp_300x400_x2$&fmt=jpg",
+         "https://cdn.aboutstatic.com/file/images/1b9158436673b34cff38253b36d7c202.jpg",
+         "https://cdn.aboutstatic.com/file/images/58445e5f6f85f7efd8450ef67476dcc6.jpg?quality=75&height=1280&width=960",
+         "https://cdn.aboutstatic.com/file/images/6d9a87f69d8db30decf94b7c78c6b3c3.jpg?quality=75&height=1280&width=960",
       ],
    },
    {
