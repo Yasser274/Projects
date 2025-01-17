@@ -186,8 +186,12 @@ if (productsShop) {
       if (maleGenderButton.classList.contains("active")) {
          let maleProducts = filterProductsByGender(productsList, "Male"); //? to only show male products in shop page
          makeProducts(productsShop, maleProducts);
+         starRating(productsList)
+         changeStarsColorTheme();
       } else {
          makeProducts(productsShop, productsList); //? show all products if it isn't active
+         starRating(productsList)
+         changeStarsColorTheme();
       }
    });
 
@@ -198,8 +202,12 @@ if (productsShop) {
       if (femaleGenderButton.classList.contains("active")) {
          let femaleProducts = filterProductsByGender(productsList, "Female");
          makeProducts(productsShop, femaleProducts);
+         starRating(productsList)
+         changeStarsColorTheme();
       } else {
          makeProducts(productsShop, productsList);
+         starRating(productsList)
+         changeStarsColorTheme();
       }
    });
 }
