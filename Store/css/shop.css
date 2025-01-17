@@ -47,6 +47,7 @@
    font-weight: 700;
 }
 
+
 /* ********************************PRODUCT SECTIONS */
 #prodetails {
    display: flex;
@@ -129,10 +130,10 @@
    align-items: center;
    margin-bottom: 34px;
 }
-#prodetails .about-product-con .add-value .add-value-box{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#prodetails .about-product-con .add-value .add-value-box {
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 #prodetails .about-product-con .pro-add-button {
    padding: 14px 25px;
@@ -192,10 +193,9 @@
    cursor: pointer;
    filter: drop-shadow(-1px 5px 5px rgba(14, 14, 14, 0.712));
    transition: transform 0.2s ease;
-
 }
-.amountChanger svg:hover{
-  transform: scale(1.1);
+.amountChanger svg:hover {
+   transform: scale(1.1);
 }
 
 /* .....................BLOG SECTION */

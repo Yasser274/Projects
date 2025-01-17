@@ -207,6 +207,9 @@ p {
 #hero button:hover::before {
    border: 3px solid rgb(182, 182, 182);
 }
+#hero .welcoming h2, .welcoming h4 {
+   color: black;
+}
 
 /* . Features */
 #feature {
