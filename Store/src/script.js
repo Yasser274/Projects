@@ -271,6 +271,11 @@ if (products || products2 || productsShop) {
 // .ADD TO CART FUNCTION
 let cart = JSON.parse(localStorage.getItem("Data")) || []; // ? || Is or so if there is localstorage already use it  if not use empty array
 
+let increaseAmountButton = document.getElementById('IncreaseingAmount')
+let decreaseAmountButton = document.getElementById('decreaseingAmount')
+
+
+
 let addedItem = async (id) => {
    let amount = Number(document.getElementById("quantityItem").value); // Convert the string into a number
    if (amount <= 0) {
@@ -428,6 +433,7 @@ function changeImages(smallImg) {
 }
 //? making it not decrease less than 0 the input number
 let quantityInput = document.getElementById("quantityItem");
+let exactQuantityInput = Number(document.getElementById('quantityItem').value)
 if (MainImg) {
    fillInProductPage(); // this to load info for the single product page
    changeImages(smallImg);
@@ -439,7 +445,22 @@ if (MainImg) {
       if (value < 1) {
          quantityInput.value = 1;
       }
+      // Update the exactQuantityInput variable when the user manually changes the value or when changed via the input arrows
+      exactQuantityInput = Number(quantityInput.value)
    });
+
+   // *Increase and Decrease Button
+   increaseAmountButton.addEventListener('click', () => {
+      exactQuantityInput += 1
+      quantityInput.value = exactQuantityInput // let them both match each other
+   })
+   decreaseAmountButton.addEventListener('click', () =>{
+      if (exactQuantityInput > 1) {
+         exactQuantityInput -= 1
+      }
+      
+      quantityInput.value = exactQuantityInput
+   })
 }
 
 // .GET FEATURE CLOTHING
