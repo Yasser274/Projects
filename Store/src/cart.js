@@ -17,6 +17,8 @@ if (bar) {
    });
 }
 
+let allProductLists = productsList; /* this  makes all my products objects into one 
+            //? now it's just one */
 // .CART TABLE HEADER
 
 document.addEventListener("scroll", () => {
@@ -83,7 +85,6 @@ let decreaseAmount = (productId, produceSize) => {
 let updateAmount = (productId, productSize) => {
    //? productId and productSize will be the same in the ${id} and ${size} generateCartItems
    let productInCart = cart.find((product) => product.id === productId && product.size === productSize);
-   let allProductLists = [...productListShop, ...productsList, ...productsList2]; //? this  makes all my products objects into one
    let search = allProductLists.find((Product) => Product.id === productId) || [];
    if (productInCart) {
       let quantityChanger = (document.getElementById(`${productId}-${productSize}`).innerHTML = productInCart.item);
@@ -99,7 +100,6 @@ let getTotal = () => {
    let totalCost = cart
       .map((itemsInsideMyCart) => {
          let { id, item } = itemsInsideMyCart;
-         let allProductLists = [...productListShop, ...productsList, ...productsList2]; //? this  makes all my products objects into one
          let search = allProductLists.find((Product) => Product.id === id) || [];
          return search.price * item;
       })
@@ -135,7 +135,6 @@ let generateCartItems = () => {
       return (cartPage.innerHTML = cart
          .map((itemsInsideMyCart) => {
             let { id, item, size } = itemsInsideMyCart;
-            let allProductLists = [...productListShop, ...productsList, ...productsList2]; //? this  makes all my products objects into one
             let search = allProductLists.find((Product) => Product.id === id) || [];
             return `
         <tr>

@@ -17,23 +17,23 @@ let darkmodeMobile = document.getElementById("darkModeMobile");
 
 let darkModeFun = () => {
    let theme = document.documentElement.getAttribute("data-theme");
-   let newTheme
+   let newTheme;
 
-   if (theme === 'dark') {
-      newTheme = 'light';
+   if (theme === "dark") {
+      newTheme = "light";
    } else {
-      newTheme = 'dark';
+      newTheme = "dark";
    }
-   
+
    // Add transition class before changing theme
-   document.body.classList.add('theme-transition');
-   
+   document.body.classList.add("theme-transition");
+
    document.documentElement.setAttribute("data-theme", newTheme);
    localStorage.setItem("theme", newTheme);
 
    // Remove transition class after transition is complete
    setTimeout(() => {
-      document.body.classList.remove('theme-transition');
+      document.body.classList.remove("theme-transition");
    }, 2000); // Adjust this timeout to match your longest transition duration
 
    document.body.style.transition = "color 1s ease-in-out, background-color 0.5s ease-in-out";
@@ -76,7 +76,6 @@ let darkModeFun = () => {
       }
    });
 };
-
 
 let syncDarkMode = () => {
    darkmode.addEventListener("change", () => {
@@ -158,15 +157,27 @@ let makeProducts = (place, theListOfProducts) => {
       })
       .join(""));
 };
+//* Get certain products(certain properties) from the productsList
+let filterProducts = (theListOfProducts, chosenIds) => {
+   // Array of selected brands
+   const selectedIds = chosenIds;
+
+   // Filtering products where the brand is one of the selected brands
+   return theListOfProducts.filter((product) => selectedIds.includes(product.id));
+};
 if (products) {
    //? this checks if  this is in the page i'm currently on it will run this
-   makeProducts(products, productsList); // ? CALL THE FUNCTION
-}
-if (products2) {
-   makeProducts(products2, productsList2);
+   let featuredHomeProducts = ["fsfes", "htehet", "egsesgsees", "5h335h", "hreher"];
+   let selectedproducts = filterProducts(productsList, featuredHomeProducts);
+   makeProducts(products, selectedproducts); // ? CALL THE FUNCTION
 }
 if (productsShop) {
-   makeProducts(productsShop, productListShop); //? SHOP PAGE
+   makeProducts(productsShop, productsList); //? SHOP PAGE
+}
+if (products2) {
+   let newlyHomeProducts = ["2441h1", "egsesgsees", "eheht3w4"];
+   let selectedproducts = filterProducts(productsList, newlyHomeProducts);
+   makeProducts(products2, selectedproducts);
 }
 
 // .FILL IN SINGLE PRODUCT INFO PAGE
@@ -178,8 +189,8 @@ function fillInProductPage() {
 
    const productId = urlParams.get("id"); //? urlParams.get('id') retrieves the value of the id parameter from the query string.
 
-   //? searches the allProductLists array for an object where the id property matches the productId retrieved from the URL
-   const product = allProductLists.find((p) => p.id === productId);
+   //? searches the productsList array for an object where the id property matches the productId retrieved from the URL
+   const product = productsList.find((p) => p.id === productId);
 
    if (product) {
       // * DOMs in single product page
@@ -255,8 +266,6 @@ function starRating(products) {
 // *CALL STAR RATING FOR EACH PAGE
 if (products || products2 || productsShop) {
    starRating(productsList);
-   starRating(productsList2);
-   starRating(productListShop);
 }
 
 // .ADD TO CART FUNCTION
@@ -264,6 +273,11 @@ let cart = JSON.parse(localStorage.getItem("Data")) || []; // ? || Is or so if t
 
 let addedItem = async (id) => {
    let amount = Number(document.getElementById("quantityItem").value); // Convert the string into a number
+   if (amount <= 0) {
+      alert("Please add at least one item.");
+      document.getElementById("quantityItem").value = 1;
+      return;
+   }
 
    //? When clothingSizes() resolves with a value (i.e., you select a size), the value is assigned to selectedSize. If clothingSizes() rejects (i.e., you don't select a size within the time limit), the catch block is executed.
    // ? Even though the catch block is present, it's only executed if the promise is rejected. Since the promise is resolved with a value (the selected size), the catch block is skipped.dsa
@@ -377,9 +391,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
    closeButtons.forEach((button) => {
       button.addEventListener("click", closePopups);
-      loginOverlay.addEventListener('click', closePopups) //? or close the popup by clicking the overlay
+      loginOverlay.addEventListener("click", closePopups); //? or close the popup by clicking the overlay
    });
-   
 
    if (registerSwitch) {
       registerSwitch.addEventListener("click", switchToRegister);
@@ -413,9 +426,20 @@ function changeImages(smallImg) {
       };
    }
 }
+//? making it not decrease less than 0 the input number
+let quantityInput = document.getElementById("quantityItem");
 if (MainImg) {
    fillInProductPage(); // this to load info for the single product page
    changeImages(smallImg);
+   // Add event listener to check the value on change
+   quantityInput.addEventListener("input", () => {
+      let value = Number(quantityInput.value);
+
+      // If the value is less than 1, reset it to 1
+      if (value < 1) {
+         quantityInput.value = 1;
+      }
+   });
 }
 
 // .GET FEATURE CLOTHING
@@ -428,25 +452,24 @@ bigFeatureClothingCon.appendChild(featureClothingCon);
 function fillInFeaturedClothing() {
    // ? we're going add the ids in this set(unique) it only registers unique values no repeats
    const addedProductIds = new Set();
-   // Get a random index from the productListShop array
+   // Get a random index from the productList array
    for (let i = 0; i < 8; i++) {
       let randomIndex;
       let productRandom;
 
       // ? do does the first loop regardless of the while condition so it will add the first product index to productRandom
       do {
-         randomIndex = Math.floor(Math.random() * productListShop.length);
-         productRandom = productListShop[randomIndex];
+         randomIndex = Math.floor(Math.random() * productsList.length);
+         productRandom = productsList[randomIndex];
       } while (addedProductIds.has(productRandom.id));
       //? The while part checks if we've already picked this product by looking in our Set (addedProductIds).
       //? If we have already picked it, the loop runs again to pick a different random product
 
       //? Once we find a product we haven't picked before, we add its ID to our Set (addedProductIds) so we remember not to pick it again.
       addedProductIds.add(productRandom.id);
-      
 
       //? after that create a card for each random product index
-      productListShop.forEach((product) => {
+      productsList.forEach((product) => {
          // ? if the product id matches the random one which it will and i added it just for me to use productRandom
          if (product.id === productRandom.id) {
             let eachProduct = document.createElement("div");

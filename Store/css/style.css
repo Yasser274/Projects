@@ -446,7 +446,7 @@ p {
    border-radius: 5px;
 }
 .banner-con2 {
-   background-image: url("https://americantall.com/cdn/shop/articles/Banner-WEB_1100x.jpg?v=1649187997");
+   background-image: url(../img/Banner.jpg);
 }
 .banner-con h4 {
    color: white;
