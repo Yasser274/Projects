@@ -399,12 +399,11 @@
                  mutation.target.classList.contains("pro-add-button")
                ) {
                  const button = mutation.target;
-                 // Directly check for attributes without setTimeout
                  if (
                    button.hasAttribute("data-amount") &&
                    button.hasAttribute("product-size")
                  ) {
-                   const productId = button.getAttribute("data-product-id"); // Get directly from button
+                   const productId = button.getAttribute("data-product-id");
                    const amount = button.getAttribute("data-amount");
                    const size = button.getAttribute("product-size");
                    const product = productsList.find((p) => p.id === productId);
@@ -412,7 +411,7 @@
                    if (product) {
                      window.dataLayer = window.dataLayer || [];
                      window.dataLayer.push({
-                       event: "addToCart", // Trigger GTM tag directly
+                       event: "addToCart",
                        ecommerce: {
                          items: [
                            {
@@ -420,10 +419,10 @@
                              item_name: product.name,
                              item_brand: product.brand,
                              item_category: product.gender,
-                             item_size: size,
                              price: product.price,
                              currency: "USD",
-                             quantity: amount,
+                             quantity: amount, // Correctly placed inside items array
+                             item_size: size, // Correctly placed inside items array
                            },
                          ],
                        },
