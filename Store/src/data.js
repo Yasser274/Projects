@@ -260,7 +260,7 @@ function handleAddToCart(product) {
                item_id: product.id,
                item_name: product.name,
                item_brand: product.brand,
-               item_category: product.category,
+               item_category: product.gender,
                price: product.price,
                currency: "USD",
                quantity: 1 // Or get the quantity from user input

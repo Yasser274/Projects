@@ -315,6 +315,8 @@ function fillInProductPage() {
 
       let addToCartButton = document.querySelector(".pro-add-button");
       addToCartButton.setAttribute("onclick", `addedItem('${productId}')`); // this is to add onclick function
+      addToCartButton.setAttribute('id', `added-to-cart-signal`)
+      addToCartButton.setAttribute('data-product-id', productId)
 
       const smallImgGroup = document.querySelector(".small-img-group");
       smallImgGroup.innerHTML = ""; // Clear any existing small image containers
