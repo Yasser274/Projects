@@ -216,3 +216,26 @@ let productsList = [
       ],
    },
 ];
+
+// *For Google Analytics Tracking products
+
+//* Extract product ID from the URL (example: ?id=fsfes)
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id'); // Get product ID from URL
+
+
+// * Find product by ID
+const foundProduct = productsList.find((item) => item.id === productId)
+
+
+// * if found (if = true continue) and it will equal true if it's there
+if (foundProduct) {
+   gtag('event','view_item', {
+      items: [{
+         item_id: foundProduct.id,
+         item_name: foundProduct.name,
+         item_brand: foundProduct.brand,
+         item_price: foundProduct.price,
+      }]
+   })
+}

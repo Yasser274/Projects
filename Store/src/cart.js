@@ -187,13 +187,25 @@ let darkmodeMobile = document.getElementById("darkModeMobile");
 
 let darkModeFun = () => {
    let theme = document.documentElement.getAttribute("data-theme");
+   let newTheme;
+
    if (theme === "dark") {
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.setItem("theme", "light");
+      newTheme = "light";
    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-      localStorage.setItem("theme", "dark");
+      newTheme = "dark";
    }
+
+   // Add transition class before changing theme
+   document.body.classList.add("theme-transition");
+
+   document.documentElement.setAttribute("data-theme", newTheme);
+   localStorage.setItem("theme", newTheme);
+
+   // Remove transition class after transition is complete
+   setTimeout(() => {
+      document.body.classList.remove("theme-transition");
+   }, 2000); // Adjust this timeout to match your longest transition duration
+   
    // Add transitions after the theme has been changed
    let featureBoxes = document.querySelectorAll(".feature-box");
    featureBoxes.forEach((featureBox) => {
