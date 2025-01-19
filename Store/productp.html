@@ -385,6 +385,60 @@
 
       <script src="src/data.js"></script>
       <script src="src/script.js"></script>
+
+      <!-- * Google analytics for add to cart tracking -->
+      <script>
+         (function() {
+           const targetNode = document.body;
+           const config = { attributes: true, childList: true, subtree: true }; // Observe changes to children
+       
+           const callback = function(mutationsList, observer) {
+             for (const mutation of mutationsList) {
+                 if (mutation.type === 'attributes' && mutation.target.classList.contains('pro-add-button')) {
+                   // Check if the mutated element is your addToCartButton
+                   const button = mutation.target;
+                   if (button.hasAttribute('data-amount') && button.hasAttribute('product-size')) {
+                       const productId = button.id.replace('id-', ''); // Assuming button ID format is 'id-productId'
+                       const amount = button.getAttribute('data-amount');
+                       const size = button.getAttribute('product-size');
+       
+                       // Find the product in productsList using productId
+                       const product = productsList.find(p => p.id === productId);
+       
+                       if (product) {
+                           // Push data to dataLayer
+                           window.dataLayer = window.dataLayer || [];
+                           window.dataLayer.push({
+                               event: 'addToCart',
+                               ecommerce: {
+                                   items: [{
+                                       item_id: product.id,
+                                       item_name: product.name,
+                                       item_brand: product.brand,
+                                       item_category: product.gender,
+                                       item_size: size,
+                                       price: product.price,
+                                       currency: "USD",
+                                       quantity: amount
+                                   }]
+                               }
+                           });
+       
+                           // Remove the attributes as they are no longer needed
+                           button.removeAttribute('data-amount');
+                           button.removeAttribute('product-size');
+                           console.log('addToCart event pushed to dataLayer', window.dataLayer);
+                       }
+                   }
+               }
+             }
+           };
+       
+           const observer = new MutationObserver(callback);
+           observer.observe(targetNode, config);
+         })();
+       </script>
+
       <!-- *SCRIPT FOR ICONS SOCIAL MEDIA -->
       <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
       <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

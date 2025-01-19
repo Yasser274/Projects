@@ -428,12 +428,7 @@ let addedItem = async (id) => {
    // ?Google analytics
    addToCartButton.setAttribute('data-amount', amount)
    addToCartButton.setAttribute('product-size', selectedSize)
-
-   // ? remove attributes after google analytics receives it
-   setTimeout(() => {
-      addToCartButton.removeAttribute('data-amount',amount)
-      addToCartButton.removeAttribute('product-size', selectedSize)
-   },2000)
+   
    exactQuantityInput = 1; //? reset the amount value after adding to cart
    document.getElementById("quantityItem").value = 1; //? reset the amount value after adding to cart
    // Debug and remove the 'selected' class from all size buttons
