@@ -424,15 +424,21 @@ let addedItem = async (id) => {
       search.item += amount; // If the item is there, increase the quantity
    }
    let addToCartButton = document.querySelector(".pro-add-button");
-   // ?Google analytics
-   addToCartButton.setAttribute('data-amount', amount)
-   addToCartButton.setAttribute('product-size', selectedSize)
 
-   // ? remove attributes after google analytics receives it
-   setTimeout(() => {
-      addToCartButton.removeAttribute('data-amount',amount)
-      addToCartButton.removeAttribute('product-size', selectedSize)
-   },500)
+     // --- DataLayer Logic (AFTER cart logic) ---
+  const addedToCartSignal = document.createElement("div");
+  addedToCartSignal.setAttribute("id", "added-to-cart-signal");
+  addedToCartSignal.setAttribute("data-product-id", id);
+  addedToCartSignal.setAttribute("data-amount", amount);
+  addedToCartSignal.setAttribute('product-size', selectedSize)
+  addedToCartSignal.style.display = "none";
+
+  document.body.appendChild(addedToCartSignal);
+  console.log(addedToCartSignal)
+
+  setTimeout(() => {
+    document.body.removeChild(addedToCartSignal);
+  }, 500);
    exactQuantityInput = 1; //? reset the amount value after adding to cart
    document.getElementById("quantityItem").value = 1; //? reset the amount value after adding to cart
    // Debug and remove the 'selected' class from all size buttons
