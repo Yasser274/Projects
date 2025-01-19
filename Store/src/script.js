@@ -187,16 +187,16 @@ if (productsShop) {
       if (maleGenderButton.classList.contains("active")) {
          let maleProducts = filterProductsByGender(productsList, "Male"); //? to only show male products in shop page
          makeProducts(productsShop, maleProducts);
-         currentPage = 1
-         paginateProducts(1, maleProducts);  // Update pagination for filtered male products
-         createPagination(maleProducts);  // Create new pagination
+         currentPage = 1;
+         paginateProducts(1, maleProducts); // Update pagination for filtered male products
+         createPagination(maleProducts); // Create new pagination
          starRating(maleProducts);
          changeStarsColorTheme();
       } else {
          makeProducts(productsShop, productsList); //? show all products if it isn't active
-         currentPage = 1
-         paginateProducts(1, productsList);  // Update pagination for all products
-         createPagination(productsList);  // Create pagination for all products
+         currentPage = 1;
+         paginateProducts(1, productsList); // Update pagination for all products
+         createPagination(productsList); // Create pagination for all products
          starRating(productsList);
          changeStarsColorTheme();
       }
@@ -209,16 +209,16 @@ if (productsShop) {
       if (femaleGenderButton.classList.contains("active")) {
          let femaleProducts = filterProductsByGender(productsList, "Female");
          makeProducts(productsShop, femaleProducts);
-         currentPage = 1
-         paginateProducts(1, femaleProducts);  // Update pagination for filtered female products
-         createPagination(femaleProducts);  // Create new pagination
+         currentPage = 1;
+         paginateProducts(1, femaleProducts); // Update pagination for filtered female products
+         createPagination(femaleProducts); // Create new pagination
          starRating(femaleProducts);
          changeStarsColorTheme();
       } else {
          makeProducts(productsShop, productsList);
-         currentPage = 1
-         paginateProducts(1, productsList);  // Update pagination for all products
-         createPagination(productsList);  // Create pagination for all products
+         currentPage = 1;
+         paginateProducts(1, productsList); // Update pagination for all products
+         createPagination(productsList); // Create pagination for all products
          starRating(productsList);
          changeStarsColorTheme();
       }
@@ -247,7 +247,7 @@ let paginateProducts = (pageNumber, filteredProducts) => {
 
    // Call the makeProducts function to display the products
    makeProducts(productsShop, paginatedProducts);
-   changeStarsColorTheme()
+   changeStarsColorTheme();
 };
 
 let createPagination = (filteredProducts) => {
@@ -273,26 +273,24 @@ let createPagination = (filteredProducts) => {
       // Add event listener to go to the selected page
       pageLink.addEventListener("click", (event) => {
          event.preventDefault();
-         currentPage = i;  // Set the current page to the clicked page
-         paginateProducts(currentPage, filteredProducts);  // Show products for the selected page
+         currentPage = i; // Set the current page to the clicked page
+         paginateProducts(currentPage, filteredProducts); // Show products for the selected page
 
          // After products are updated, update pagination with the correct active page
-         createPagination(filteredProducts);  // Recreate pagination links
+         createPagination(filteredProducts); // Recreate pagination links
       });
 
       paginationContainer.appendChild(pageLink);
    }
 
-   changeStarsColorTheme();  // Your custom function for stars color theme
+   changeStarsColorTheme(); // Your custom function for stars color theme
 };
-
 
 // Initial page load
 if (productsShop) {
-   paginateProducts(currentPage, productsList);  // Load products for the first page
-   createPagination(productsList);  // Create page numbers for all products
+   paginateProducts(currentPage, productsList); // Load products for the first page
+   createPagination(productsList); // Create page numbers for all products
 }
-
 
 // .FILL IN SINGLE PRODUCT INFO PAGE
 
@@ -553,7 +551,9 @@ function changeImages(smallImg) {
 }
 //? making it not decrease less than 0 the input number
 let quantityInput = document.getElementById("quantityItem");
-let exactQuantityInput = Number(document.getElementById("quantityItem").value);
+if (quantityInput) {
+   exactQuantityInput = Number(document.getElementById("quantityItem").value);
+}
 if (MainImg) {
    fillInProductPage(); // this to load info for the single product page
    changeImages(smallImg);
@@ -588,7 +588,9 @@ if (MainImg) {
 let bigFeatureClothingCon = document.getElementById("product1");
 let featureClothingCon = document.createElement("div");
 featureClothingCon.classList.add("pro-container");
-bigFeatureClothingCon.appendChild(featureClothingCon);
+if (bigFeatureClothingCon) {
+   bigFeatureClothingCon.appendChild(featureClothingCon);
+}
 
 function fillInFeaturedClothing() {
    // ? we're going add the ids in this set(unique) it only registers unique values no repeats
