@@ -427,18 +427,19 @@
                          ],
                        },
                      });
-       
-                     console.log("addToCart event pushed to dataLayer", window.dataLayer);
                    }
                  }
                }
              }
+             
            };
+           
        
            const observer = new MutationObserver(callback);
            observer.observe(targetNode, config);
          })();
        </script>
+       
 
       <!-- *SCRIPT FOR ICONS SOCIAL MEDIA -->
       <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
