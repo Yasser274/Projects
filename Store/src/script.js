@@ -426,8 +426,10 @@ let addedItem = async (id) => {
    let addToCartButton = document.querySelector(".pro-add-button");
    
    // ?Google analytics
+   addToCartButton.setAttribute("data-product-id", id);
    addToCartButton.setAttribute('data-amount', amount)
    addToCartButton.setAttribute('product-size', selectedSize)
+   console.log("Added to cart:", { id, amount, selectedSize }); // Debugging
    
    exactQuantityInput = 1; //? reset the amount value after adding to cart
    document.getElementById("quantityItem").value = 1; //? reset the amount value after adding to cart

@@ -388,48 +388,50 @@
 
       <!-- * Google analytics for add to cart tracking -->
       <script>
-         (function() {
+         (function () {
            const targetNode = document.body;
-           const config = { attributes: true, childList: true, subtree: true }; // Observe changes to children
+           const config = { attributes: true, subtree: true };
        
-           const callback = function(mutationsList, observer) {
+           const callback = function (mutationsList, observer) {
              for (const mutation of mutationsList) {
-                 if (mutation.type === 'attributes' && mutation.target.classList.contains('pro-add-button')) {
-                   // Check if the mutated element is your addToCartButton
-                   const button = mutation.target;
-                   if (button.hasAttribute('data-amount') && button.hasAttribute('product-size')) {
-                       const productId = button.id.replace('id-', ''); // Assuming button ID format is 'id-productId'
-                       const amount = button.getAttribute('data-amount');
-                       const size = button.getAttribute('product-size');
+               if (
+                 mutation.type === "attributes" &&
+                 mutation.target.classList.contains("pro-add-button")
+               ) {
+                 const button = mutation.target;
+                 // Directly check for attributes without setTimeout
+                 if (
+                   button.hasAttribute("data-amount") &&
+                   button.hasAttribute("product-size")
+                 ) {
+                   const productId = button.getAttribute("data-product-id"); // Get directly from button
+                   const amount = button.getAttribute("data-amount");
+                   const size = button.getAttribute("product-size");
+                   const product = productsList.find((p) => p.id === productId);
        
-                       // Find the product in productsList using productId
-                       const product = productsList.find(p => p.id === productId);
+                   if (product) {
+                     window.dataLayer = window.dataLayer || [];
+                     window.dataLayer.push({
+                       event: "addToCart", // Trigger GTM tag directly
+                       ecommerce: {
+                         items: [
+                           {
+                             item_id: product.id,
+                             item_name: product.name,
+                             item_brand: product.brand,
+                             item_category: product.gender,
+                             item_size: size,
+                             price: product.price,
+                             currency: "USD",
+                             quantity: amount,
+                           },
+                         ],
+                       },
+                     });
        
-                       if (product) {
-                           // Push data to dataLayer
-                           window.dataLayer = window.dataLayer || [];
-                           window.dataLayer.push({
-                               event: 'addToCart',
-                               ecommerce: {
-                                   items: [{
-                                       item_id: product.id,
-                                       item_name: product.name,
-                                       item_brand: product.brand,
-                                       item_category: product.gender,
-                                       item_size: size,
-                                       price: product.price,
-                                       currency: "USD",
-                                       quantity: amount
-                                   }]
-                               }
-                           });
-       
-                           // Remove the attributes as they are no longer needed
-                           button.removeAttribute('data-amount');
-                           button.removeAttribute('product-size');
-                           console.log('addToCart event pushed to dataLayer', window.dataLayer);
-                       }
+                     console.log("addToCart event pushed to dataLayer", window.dataLayer);
                    }
+                 }
                }
              }
            };
