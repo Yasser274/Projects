@@ -217,25 +217,54 @@ let productsList = [
    },
 ];
 
+// Function to push data to the data layer
+function pushToDataLayer(event, data) {
+   window.dataLayer.push({
+       'event': event,
+       ...data
+   });
+}
+
+
 // *For Google Analytics Tracking products
 
 //* Extract product ID from the URL (example: ?id=fsfes)
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id'); // Get product ID from URL
 
-
 // * Find product by ID
 const foundProduct = productsList.find((item) => item.id === productId)
 
-
 // * if found (if = true continue) and it will equal true if it's there
 if (foundProduct) {
-   gtag('event','view_item', {
-      items: [{
-         item_id: foundProduct.id,
-         item_name: foundProduct.name,
-         item_brand: foundProduct.brand,
-         item_price: foundProduct.price,
-      }]
-   })
+   pushToDataLayer('view_item', {
+       ecommerce: {
+           items: [{
+               item_id: foundProduct.id,
+               item_name: foundProduct.name,
+               item_brand: foundProduct.brand,
+               item_category: foundProduct.gender, // Add category if available
+               price: foundProduct.price,
+               currency: "SAR", // Set your currency
+               index: 0 // Position in the list if on a product listing page
+           }]
+       }
+   });
+}
+
+// Example add to cart event (you'll need to trigger this from your "Add to Cart" button's click event)
+function handleAddToCart(product) {
+   pushToDataLayer('add_to_cart', {
+       ecommerce: {
+           items: [{
+               item_id: product.id,
+               item_name: product.name,
+               item_brand: product.brand,
+               item_category: product.category,
+               price: product.price,
+               currency: "USD",
+               quantity: 1 // Or get the quantity from user input
+           }]
+       }
+   });
 }
