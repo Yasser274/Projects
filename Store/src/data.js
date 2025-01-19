@@ -264,7 +264,7 @@ function handleAddToCart(product) {
                item_size: product.size,
                price: product.price,
                currency: "USD",
-               quantity: 1 // Or get the quantity from user input
+               quantity: product.amount // Or get the quantity from user input
            }]
        }
    });
