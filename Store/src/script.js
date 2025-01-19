@@ -317,6 +317,7 @@ function fillInProductPage() {
       addToCartButton.setAttribute("onclick", `addedItem('${productId}')`); // this is to add onclick function
       addToCartButton.setAttribute('id', `added-to-cart-signal`)
       addToCartButton.setAttribute('data-product-id', productId)
+      
 
       const smallImgGroup = document.querySelector(".small-img-group");
       smallImgGroup.innerHTML = ""; // Clear any existing small image containers
@@ -401,6 +402,7 @@ let addedItem = async (id) => {
    let selectedSize = await clothingSizes().catch(() => {
       alert("Please select a size");
       document.getElementById("quantityItem").value = 1;
+      exactQuantityInput = 1
       return null;
    });
 
@@ -421,6 +423,9 @@ let addedItem = async (id) => {
    } else {
       search.item += amount; // If the item is there, increase the quantity
    }
+   let addToCartButton = document.querySelector(".pro-add-button");
+   addToCartButton.setAttribute('data-amount', amount)
+   console.log(amount)
    exactQuantityInput = 1; //? reset the amount value after adding to cart
    document.getElementById("quantityItem").value = 1; //? reset the amount value after adding to cart
    // Debug and remove the 'selected' class from all size buttons
