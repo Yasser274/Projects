@@ -315,9 +315,8 @@ function fillInProductPage() {
 
       let addToCartButton = document.querySelector(".pro-add-button");
       addToCartButton.setAttribute("onclick", `addedItem('${productId}')`); // this is to add onclick function
-      addToCartButton.setAttribute('id', `added-to-cart-signal`)
-      addToCartButton.setAttribute('data-product-id', productId)
-      
+      addToCartButton.setAttribute("id", `added-to-cart-signal`);
+      addToCartButton.setAttribute("data-product-id", productId);
 
       const smallImgGroup = document.querySelector(".small-img-group");
       smallImgGroup.innerHTML = ""; // Clear any existing small image containers
@@ -402,7 +401,7 @@ let addedItem = async (id) => {
    let selectedSize = await clothingSizes().catch(() => {
       alert("Please select a size");
       document.getElementById("quantityItem").value = 1;
-      exactQuantityInput = 1
+      exactQuantityInput = 1;
       return null;
    });
 
@@ -424,13 +423,12 @@ let addedItem = async (id) => {
       search.item += amount; // If the item is there, increase the quantity
    }
    let addToCartButton = document.querySelector(".pro-add-button");
-   
+
    // ?Google analytics
    addToCartButton.setAttribute("data-product-id", id);
-   addToCartButton.setAttribute('data-amount', amount)
-   addToCartButton.setAttribute('product-size', selectedSize)
-   
-   
+   addToCartButton.setAttribute("data-amount", amount);
+   addToCartButton.setAttribute("product-size", selectedSize);
+
    exactQuantityInput = 1; //? reset the amount value after adding to cart
    document.getElementById("quantityItem").value = 1; //? reset the amount value after adding to cart
    // Debug and remove the 'selected' class from all size buttons
@@ -686,6 +684,29 @@ function clothingSizes() {
             reject();
          }, 200);
       }
+   });
+}
+
+// .NewsLetter and Google Analytics on it
+const newsLetterInfo = document.getElementById("newsletterEmail");
+const newsLetterSubmitButton = document.getElementById("newsletterSubmissionButton");
+
+if (newsLetterInfo) {
+   newsLetterSubmitButton.addEventListener("click", () => {
+      let getNewsLetterEmail = newsLetterInfo.value;
+      newsLetterInfo.setAttribute("newsletter_emails", getNewsLetterEmail);
+
+      //* Push an event to the data layer
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+         event: "newsletter_signup",
+         newsletterEmail: getNewsLetterEmail,
+      });
+
+      // *remove it after 2 sec
+      setTimeout(() => {
+         newsLetterInfo.removeAttribute("newsletter_emails");
+      }, 2000);
    });
 }
 
