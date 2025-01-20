@@ -690,23 +690,66 @@ function clothingSizes() {
 // .NewsLetter and Google Analytics on it
 const newsLetterInfo = document.getElementById("newsletterEmail");
 const newsLetterSubmitButton = document.getElementById("newsletterSubmissionButton");
+const newsLetterBox = document.querySelector(".newsletter-right"); //? get classname
+
+function isValidEmail(email) {
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   return emailRegex.test(email);
+}
 
 if (newsLetterInfo) {
    newsLetterSubmitButton.addEventListener("click", () => {
       let getNewsLetterEmail = newsLetterInfo.value;
-      newsLetterInfo.setAttribute("newsletter_emails", getNewsLetterEmail);
 
-      //* Push an event to the data layer
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-         event: "newsletter_signup",
-         newsletterEmail: getNewsLetterEmail,
-      });
+      if (isValidEmail(getNewsLetterEmail)) {
+         newsLetterInfo.setAttribute("newsletter_emails", getNewsLetterEmail);
 
-      // *remove it after 2 sec
-      setTimeout(() => {
-         newsLetterInfo.removeAttribute("newsletter_emails");
-      }, 2000);
+         // * Remove styling and element when entered a valid email
+         let emailWarning = document.querySelector(".email-invalid"); // i had to do this because emailWarning is only inside else scope cannot be used anywhere else
+         if (emailWarning) {
+            //? if it exist
+            newsLetterBox.removeChild(emailWarning);
+            newsLetterInfo.classList.remove("invalid");
+         }
+         // * add thank you for signing up when valid only if it doesn't exist
+         if (!newsLetterBox.querySelector(".newsletter-signedup")) {
+            let thankyouSignup = document.createElement("div");
+            thankyouSignup.classList.add("newsletter-signedup");
+            thankyouSignup.textContent = "Thank you for signing up ✅";
+            newsLetterBox.appendChild(thankyouSignup);
+         }
+
+         //* Push an event to the data layer
+         window.dataLayer = window.dataLayer || [];
+         window.dataLayer.push({
+            event: "newsletter_signup",
+            newsletterEmail: getNewsLetterEmail,
+         });
+         console.log(window.dataLayer)
+
+         // *remove it after 2 sec
+         setTimeout(() => {
+            newsLetterInfo.removeAttribute("newsletter_emails");
+         }, 2000);
+      } else {
+         // * Remove Thank you sign up div if it was there
+         let thankyouSignup = document.querySelector(".newsletter-signedup");
+         if (thankyouSignup) {
+            newsLetterBox.removeChild(thankyouSignup); //? if it's there remove it from under newsLetterBox div
+         }
+
+         // 1. Create the error message div ONLY IF IT DOESN'T EXIST:
+         if (!newsLetterBox.querySelector(".email-invalid")) {
+            let emailWarning = document.createElement("div"); // this only creates else scope
+            emailWarning.classList.add("email-invalid");
+            emailWarning.textContent = "Please enter a valid email";
+            // 2. Insert the div into newsLetterBox:
+            newsLetterBox.appendChild(emailWarning);
+
+            newsLetterInfo.classList.add("invalid");
+         }
+         console.log(window.dataLayer)
+      }
    });
 }
 

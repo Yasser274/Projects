@@ -207,7 +207,8 @@ p {
 #hero button:hover::before {
    border: 3px solid rgb(182, 182, 182);
 }
-#hero .welcoming h2, .welcoming h4 {
+#hero .welcoming h2,
+.welcoming h4 {
    color: black;
 }
 
@@ -285,10 +286,11 @@ p {
    flex-direction: row;
    gap: 5px;
 }
-.title-feature h2,.title-feature-shop h2 {
+.title-feature h2,
+.title-feature-shop h2 {
    font-size: 2rem;
 }
-.genderSelection button{
+.genderSelection button {
    padding: 10px 15px;
    background-color: transparent;
    border: red 2px solid;
@@ -298,26 +300,26 @@ p {
    border-radius: 14px;
 }
 .maleGenderButton button {
-   border: 3px solid #7393B3;
+   border: 3px solid #7393b3;
    transition: background-color 0.2s ease-in-out;
 }
 .femaleGenderButton button {
-   border: 3px solid #F88379;
+   border: 3px solid #f88379;
    transition: background-color 0.2s ease-in-out;
 }
 .maleGenderButton button:hover {
-   background-color: #7393B3;
+   background-color: #7393b3;
 }
 .femaleGenderButton button:hover {
-   background-color: #F88379;
+   background-color: #f88379;
 }
 .maleGenderButton.active {
-   background-color: #7393B3;
+   background-color: #7393b3;
    border-radius: 14px;
    transition: background-color 0.2s ease-in-out;
 }
 .femaleGenderButton.active {
-   background-color: #F88379;
+   background-color: #f88379;
    border-radius: 14px;
    transition: background-color 0.2s ease-in-out;
 }
@@ -630,8 +632,27 @@ p {
    outline: none;
    box-sizing: border-box;
 }
+.newsletter-right input.invalid {
+   outline: red 2px solid;
+}
 .newsletter-right input::placeholder {
    color: rgb(158, 158, 158);
+}
+.email-invalid {
+   position: absolute;
+   color: red;
+   font-size: 1.2rem;
+   padding-top: 10px;
+   font-weight: 900;
+   filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.986));
+}
+.newsletter-signedup {
+   position: absolute;
+   color: white;
+   padding-top: 10px;
+   font-size: 1.2rem;
+   font-weight: 900;
+   filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.986));
 }
 .newsletter-right button {
    font-size: 1.6rem;
