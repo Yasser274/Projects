@@ -375,69 +375,6 @@
       <script src="src/data.js"></script>
       <script src="src/script.js"></script>
 
-      <!-- * Google analytics for add to cart tracking -->
-      <script>
-         (function () {
-            const targetNode = document.body;
-            const config = { attributes: true, subtree: true };
-            let addToCartEventPushed = false; // Flag to prevent multiple pushes for the same click
-
-            const callback = function (mutationsList, observer) {
-               for (const mutation of mutationsList) {
-                  if (
-                     mutation.type === "attributes" &&
-                     mutation.target.classList.contains("pro-add-button")
-                  ) {
-                     const button = mutation.target;
-                     if (
-                        button.hasAttribute("data-amount") &&
-                        button.hasAttribute("product-size") &&
-                        !addToCartEventPushed
-                     ) {
-                        addToCartEventPushed = true; // Set flag to prevent further pushes for this click
-
-                        const productId = button.getAttribute("data-product-id");
-                        const amount = button.getAttribute("data-amount");
-                        const size = button.getAttribute("product-size");
-                        const product = productsList.find((p) => p.id === productId);
-
-                        if (product) {
-                           // Delay pushing data to ensure DOM is updated
-                           setTimeout(() => {
-                              window.dataLayer = window.dataLayer || [];
-                              window.dataLayer.push({
-                                 event: "addToCart",
-                                 ecommerce: {
-                                    items: [
-                                       {
-                                          item_id: product.id,
-                                          item_name: product.name,
-                                          item_brand: product.brand,
-                                          item_category: product.gender,
-                                          price: product.price * amount,
-                                          currency: "USD",
-                                          quantity: amount,
-                                          item_size: size,
-                                       },
-                                    ],
-                                 },
-                              });
-
-                              // Reset the flag after a short delay
-                              setTimeout(() => {
-                                 addToCartEventPushed = false;
-                              }, 100);
-                           }, 100); // 100ms delay
-                        }
-                     }
-                  }
-               }
-            };
-
-            const observer = new MutationObserver(callback);
-            observer.observe(targetNode, config);
-         })();
-      </script>
 
       <!-- *SCRIPT FOR ICONS SOCIAL MEDIA -->
       <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
