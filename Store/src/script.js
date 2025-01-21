@@ -424,10 +424,23 @@ let addedItem = async (id) => {
    }
    let addToCartButton = document.querySelector(".pro-add-button");
 
+   // Find the product details from productsList
+   let product = productsList.find((item) => item.id === addedProduct);
+
    // ?Google analytics
    addToCartButton.setAttribute("data-product-id", id);
    addToCartButton.setAttribute("data-amount", amount);
    addToCartButton.setAttribute("product-size", selectedSize);
+
+   //? Push to dataLayer and console.log (using handleAddToCart)
+   if (product) {
+      // Only push to dataLayer if the product is found in productsList
+      handleAddToCart({
+         ...product,
+         size: selectedSize, // Add selected size to the product object
+         amount: amount, // Add amount to the product object
+      });
+   }
 
    exactQuantityInput = 1; //? reset the amount value after adding to cart
    document.getElementById("quantityItem").value = 1; //? reset the amount value after adding to cart

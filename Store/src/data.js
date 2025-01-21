@@ -237,10 +237,10 @@ const foundProduct = productsList.find((item) => item.id === productId)
 
 // * if found (if = true continue) and it will equal true if it's there
 if (foundProduct) {
-   pushToDataLayer('view_item', {
+   pushToDataLayer('view_item', { //? Event name is view_item while data is ecommerce important to know for google tag and analytics
        ecommerce: {
            items: [{
-               item_id: foundProduct.id,
+               item_id: foundProduct.id, //? item_id is a parameter while foundProduct.id is the value
                item_name: foundProduct.name,
                item_brand: foundProduct.brand,
                item_category: foundProduct.gender, // Add category if available
@@ -254,8 +254,9 @@ if (foundProduct) {
 
 // Example add to cart event (you'll need to trigger this from your "Add to Cart" button's click event)
 function handleAddToCart(product) {
-   pushToDataLayer('add_to_cart', {
+   const addToCartData = {
        ecommerce: {
+           value: product.price * product.amount,
            items: [{
                item_id: product.id,
                item_name: product.name,
@@ -263,9 +264,11 @@ function handleAddToCart(product) {
                item_category: product.gender,
                item_size: product.size,
                price: product.price,
-               currency: "USD",
-               quantity: product.amount 
+               currency: "SAR", // Use your store's currency
+               quantity: product.amount
            }]
        }
-   });
+   };
+
+   pushToDataLayer('add_to_cart', addToCartData);
 }
