@@ -264,7 +264,7 @@ function handleAddToCart(product) {
                item_category: product.gender,
                item_size: product.size,
                price: product.price,
-               currency: "SAR", // Use your store's currency
+               currency: currency, // Use your store's currency
                quantity: product.amount
            }]
        }
