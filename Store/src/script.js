@@ -314,9 +314,18 @@ function fillInProductPage() {
       document.querySelector(".product-des").innerText = product.description || "No description available";
 
       let addToCartButton = document.querySelector(".pro-add-button");
-      addToCartButton.setAttribute("onclick", `addedItem('${productId}')`); // this is to add onclick function
+      // addToCartButton.setAttribute("onclick", `addedItem('${productId}')`); // this is to add onclick function
       addToCartButton.setAttribute("id", `added-to-cart-signal`);
       addToCartButton.setAttribute("data-product-id", productId);
+      const clickingIdAddToCart = document.getElementById("added-to-cart-signal");
+      clickingIdAddToCart.addEventListener("click", () => {
+         // Find the product details from productsList
+
+         let product = productsList.find((item) => item.id === productId);
+         addedItem(product.id);
+         
+      });
+      
 
       const smallImgGroup = document.querySelector(".small-img-group");
       smallImgGroup.innerHTML = ""; // Clear any existing small image containers
