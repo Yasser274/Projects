@@ -646,7 +646,7 @@ p {
    font-weight: 900;
    filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.986));
 }
-.newsletter-signedup {
+.newsletter-signedup , .newsletter-already-signedup {
    position: absolute;
    color: white;
    padding-top: 10px;

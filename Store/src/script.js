@@ -696,59 +696,104 @@ function isValidEmail(email) {
    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
    return emailRegex.test(email);
 }
+// *Event Listener for newsletter button
+function newsLetterHandleSignupClick() {
+   let getNewsLetterEmail = newsLetterInfo.value;
 
-if (newsLetterInfo) {
-   newsLetterSubmitButton.addEventListener("click", () => {
-      let getNewsLetterEmail = newsLetterInfo.value;
+   if (isValidEmail(getNewsLetterEmail)) {
+      // 1. Check for Duplicates in localStorage:
+      let signedUpEmails = JSON.parse(localStorage.getItem("signedUpEmails")) || []; //? Get array or initialize an empty one
+      if (signedUpEmails.includes(getNewsLetterEmail)) {
+         // * add already signed up div only if it doesn't exist
 
-      if (isValidEmail(getNewsLetterEmail)) {
-         newsLetterInfo.setAttribute("newsletter_emails", getNewsLetterEmail);
-
-         // * Remove styling and element when entered a valid email
-         let emailWarning = document.querySelector(".email-invalid"); // i had to do this because emailWarning is only inside else scope cannot be used anywhere else
+         let thankyouSignup = document.querySelector(".newsletter-signedup");
+         let emailWarning = document.querySelector(".email-invalid");
+         if (thankyouSignup) {
+            newsLetterBox.removeChild(thankyouSignup);
+         }
          if (emailWarning) {
-            //? if it exist
             newsLetterBox.removeChild(emailWarning);
             newsLetterInfo.classList.remove("invalid");
          }
-         // * add thank you for signing up when valid only if it doesn't exist
-         if (!newsLetterBox.querySelector(".newsletter-signedup")) {
-            let thankyouSignup = document.createElement("div");
-            thankyouSignup.classList.add("newsletter-signedup");
-            thankyouSignup.textContent = "Thank you for signing up ✅";
-            newsLetterBox.appendChild(thankyouSignup);
+         if (!newsLetterBox.querySelector(".newsletter-already-signedup")) {
+            let alreadySignedUp = document.createElement("div");
+            alreadySignedUp.classList.add("newsletter-already-signedup");
+            alreadySignedUp.textContent = "You're already signed up";
+            newsLetterBox.appendChild(alreadySignedUp);
          }
 
-         //* Push an event to the data layer
-         window.dataLayer = window.dataLayer || [];
-         window.dataLayer.push({
-            event: "newsletter_signup",
-            newsletterEmail: getNewsLetterEmail,
-         });
-         console.log(window.dataLayer)
+         return; // Don't proceed with data layer push
+      }
+      // 2. If Not a Duplicate, Proceed:
 
-         // *remove it after 2 sec
-         setTimeout(() => {
-            newsLetterInfo.removeAttribute("newsletter_emails");
-         }, 2000);
-      } else {
-         // * Remove Thank you sign up div if it was there
-         let thankyouSignup = document.querySelector(".newsletter-signedup");
-         if (thankyouSignup) {
-            newsLetterBox.removeChild(thankyouSignup); //? if it's there remove it from under newsLetterBox div
+      newsLetterInfo.setAttribute("newsletter_emails", getNewsLetterEmail);
+
+      // * Remove styling and element when entered a valid email
+      let emailWarning = document.querySelector(".email-invalid"); // i had to do this because emailWarning is only inside else scope cannot be used anywhere else
+      let alreadySignedUp = document.querySelector(".newsletter-already-signedup");
+      if (emailWarning) {
+         //? if it exist
+         newsLetterBox.removeChild(emailWarning);
+         newsLetterInfo.classList.remove("invalid");
+      }
+
+      // * add thank you for signing up when valid only if it doesn't exist
+      if (!newsLetterBox.querySelector(".newsletter-signedup")) {
+         if (alreadySignedUp) {
+            newsLetterBox.removeChild(alreadySignedUp);
          }
+         let thankyouSignup = document.createElement("div");
+         thankyouSignup.classList.add("newsletter-signedup");
+         thankyouSignup.textContent = "Thank you for signing up ✅";
+         newsLetterBox.appendChild(thankyouSignup);
+      }
 
-         // 1. Create the error message div ONLY IF IT DOESN'T EXIST:
-         if (!newsLetterBox.querySelector(".email-invalid")) {
-            let emailWarning = document.createElement("div"); // this only creates else scope
-            emailWarning.classList.add("email-invalid");
-            emailWarning.textContent = "Please enter a valid email";
-            // 2. Insert the div into newsLetterBox:
-            newsLetterBox.appendChild(emailWarning);
+      //* Push an event to the data layer
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+         event: "newsletter_signup",
+         newsletterEmail: getNewsLetterEmail,
+      });
 
-            newsLetterInfo.classList.add("invalid");
-         }
-         console.log(window.dataLayer)
+      // 3. Add Email to localStorage:
+      signedUpEmails.push(getNewsLetterEmail);
+      localStorage.setItem("signedUpEmails", JSON.stringify(signedUpEmails));
+
+      // *remove it after 2 sec
+      setTimeout(() => {
+         newsLetterInfo.removeAttribute("newsletter_emails");
+      }, 2000);
+   } else {
+      // * Remove Thank you sign up div if it was there and already signed up
+      let thankyouSignup = document.querySelector(".newsletter-signedup");
+      if (thankyouSignup) {
+         newsLetterBox.removeChild(thankyouSignup); //? if it's there remove it from under newsLetterBox div
+      }
+      let alreadySignedUp = document.querySelector(".newsletter-already-signedup");
+      if (alreadySignedUp) {
+         newsLetterBox.removeChild(alreadySignedUp);
+      }
+
+      // 1. Create the error message div ONLY IF IT DOESN'T EXIST:
+      if (!newsLetterBox.querySelector(".email-invalid")) {
+         let emailWarning = document.createElement("div"); // this only creates else scope
+         emailWarning.classList.add("email-invalid");
+         emailWarning.textContent = "Please enter a valid email";
+         // 2. Insert the div into newsLetterBox:
+         newsLetterBox.appendChild(emailWarning);
+
+         newsLetterInfo.classList.add("invalid");
+      }
+   }
+}
+
+if (newsLetterInfo) {
+   newsLetterSubmitButton.addEventListener("click", () => {
+      newsLetterHandleSignupClick();
+   });
+   newsLetterInfo.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+         newsLetterHandleSignupClick();
       }
    });
 }
